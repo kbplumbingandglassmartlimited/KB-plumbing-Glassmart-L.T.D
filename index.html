@@ -36,6 +36,12 @@
 
     <!-- Customized Bootstrap Stylesheet -->
     <link href="css/style.min.css" rel="stylesheet">
+    <style>
+        /* Video product tweaks: hide action buttons so videos can play directly */
+        .video-product .product-action{display:none !important}
+        .product-img video{cursor:pointer}
+        .product-img video[controls]{max-height:320px;object-fit:cover}
+    </style>
 </head>
 
 <body>
@@ -101,6 +107,15 @@
     </div>
     <!-- Topbar End -->
 
+    <!-- Submit Video Button -->
+    <div class="container-fluid mt-3">
+        <div class="row px-xl-5">
+            <div class="col-12 text-right mb-3">
+                <button class="btn btn-primary" id="openSubmitVideoBtn">Submit Your Video</button>
+            </div>
+        </div>
+    </div>
+
 
     <!-- Navbar Start -->
     <div class="container-fluid bg-dark mb-30">
@@ -139,8 +154,8 @@
             <div class="col-lg-9">
                 <nav class="navbar navbar-expand-lg bg-dark navbar-dark py-3 py-lg-0 px-0">
                     <a href="" class="text-decoration-none d-block d-lg-none">
-                        <span class="h1 text-uppercase text-dark bg-light px-2">Multi</span>
-                        <span class="h1 text-uppercase text-light bg-primary px-2 ml-n1">Shop</span>
+                            <span class="h1 text-uppercase text-primary bg-dark px-2">KB PLUMBING &</span>
+                            <span class="h1 text-uppercase text-dark bg-primary px-2 ml-n1">GLASMART</span>
                     </a>
                     <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
                         <span class="navbar-toggler-icon"></span>
@@ -384,7 +399,10 @@
             <div class="col-lg-3 col-md-4 col-sm-6 pb-1">
                 <div class="product-item bg-light mb-4">
                     <div class="product-img position-relative overflow-hidden">
-                        <img class="img-fluid w-100" src="img/dranage.jpeg" alt="">
+                        <video class="img-fluid w-100" playsinline muted loop controls>
+                            <source src="img/photos/video set (1).mp4" type="video/mp4">
+                            Your browser does not support the video tag.
+                        </video>
                         <div class="product-action">
                             <a class="btn btn-outline-dark btn-square" href=""><i class="fa fa-shopping-cart"></i></a>
                             <a class="btn btn-outline-dark btn-square" href=""><i class="far fa-heart"></i></a>
@@ -411,7 +429,10 @@
             <div class="col-lg-3 col-md-4 col-sm-6 pb-1">
                 <div class="product-item bg-light mb-4">
                     <div class="product-img position-relative overflow-hidden">
-                        <img class="img-fluid w-100" src="img/kitchen tool.jpg" alt="">
+                        <video class="img-fluid w-100" playsinline muted loop controls>
+                            <source src="img/photos/video set (2).mp4" type="video/mp4">
+                            Your browser does not support the video tag.
+                        </video>
                         <div class="product-action">
                             <a class="btn btn-outline-dark btn-square" href=""><i class="fa fa-shopping-cart"></i></a>
                             <a class="btn btn-outline-dark btn-square" href=""><i class="far fa-heart"></i></a>
@@ -438,7 +459,10 @@
             <div class="col-lg-3 col-md-4 col-sm-6 pb-1">
                 <div class="product-item bg-light mb-4">
                     <div class="product-img position-relative overflow-hidden">
-                        <img class="img-fluid w-100" src="img/IMG_7266.jpeg" alt="">
+                        <video class="img-fluid w-100" playsinline muted loop controls>
+                            <source src="img/photos/video set (3).mp4" type="video/mp4">
+                            Your browser does not support the video tag.
+                        </video>
                         <div class="product-action">
                             <a class="btn btn-outline-dark btn-square" href=""><i class="fa fa-shopping-cart"></i></a>
                             <a class="btn btn-outline-dark btn-square" href=""><i class="far fa-heart"></i></a>
@@ -465,7 +489,10 @@
             <div class="col-lg-3 col-md-4 col-sm-6 pb-1">
                 <div class="product-item bg-light mb-4">
                     <div class="product-img position-relative overflow-hidden">
-                        <img class="img-fluid w-100" src="img/pipe one.jpg" alt="">
+                        <video class="img-fluid w-100" playsinline muted loop controls>
+                            <source src="img/photos/video set (4).mp4" type="video/mp4">
+                            Your browser does not support the video tag.
+                        </video>
                         <div class="product-action">
                             <a class="btn btn-outline-dark btn-square" href=""><i class="fa fa-shopping-cart"></i></a>
                             <a class="btn btn-outline-dark btn-square" href=""><i class="far fa-heart"></i></a>
@@ -493,7 +520,10 @@
             <div class="col-lg-3 col-md-4 col-sm-6 pb-1">
                 <div class="product-item bg-light mb-4">
                     <div class="product-img position-relative overflow-hidden">
-                        <img class="img-fluid w-100" src="img/Gutter pipe.png" alt="">
+                        <video class="img-fluid w-100" playsinline muted loop controls>
+                            <source src="img/photos/video set (5).mp4" type="video/mp4">
+                            Your browser does not support the video tag.
+                        </video>
                         <div class="product-action">
                             <a class="btn btn-outline-dark btn-square" href=""><i class="fa fa-shopping-cart"></i></a>
                             <a class="btn btn-outline-dark btn-square" href=""><i class="far fa-heart"></i></a>
@@ -520,7 +550,10 @@
             <div class="col-lg-3 col-md-4 col-sm-6 pb-1">
                 <div class="product-item bg-light mb-4">
                     <div class="product-img position-relative overflow-hidden">
-                        <img class="img-fluid w-100" src="img/pvc pipe.jpeg" alt="">
+                        <video class="img-fluid w-100" playsinline muted loop controls>
+                            <source src="img/photos/video set (6).mp4" type="video/mp4">
+                            Your browser does not support the video tag.
+                        </video>
                         <div class="product-action">
                             <a class="btn btn-outline-dark btn-square" href=""><i class="fa fa-shopping-cart"></i></a>
                             <a class="btn btn-outline-dark btn-square" href=""><i class="far fa-heart"></i></a>
@@ -547,7 +580,10 @@
             <div class="col-lg-3 col-md-4 col-sm-6 pb-1">
                 <div class="product-item bg-light mb-4">
                     <div class="product-img position-relative overflow-hidden">
-                        <img class="img-fluid w-100" src="img/corners.jpg" alt="">
+                        <video class="img-fluid w-100" playsinline muted loop controls>
+                            <source src="img/photos/video set (7).mp4" type="video/mp4">
+                            Your browser does not support the video tag.
+                        </video>
                         <div class="product-action">
                             <a class="btn btn-outline-dark btn-square" href=""><i class="fa fa-shopping-cart"></i></a>
                             <a class="btn btn-outline-dark btn-square" href=""><i class="far fa-heart"></i></a>
@@ -574,7 +610,10 @@
             <div class="col-lg-3 col-md-4 col-sm-6 pb-1">
                 <div class="product-item bg-light mb-4">
                     <div class="product-img position-relative overflow-hidden">
-                        <img class="img-fluid w-100" src="img/t gutter.png" alt="">
+                        <video class="img-fluid w-100" playsinline muted loop controls>
+                            <source src="img/photos/video set (8).mp4" type="video/mp4">
+                            Your browser does not support the video tag.
+                        </video>
                         <div class="product-action">
                             <a class="btn btn-outline-dark btn-square" href=""><i class="fa fa-shopping-cart"></i></a>
                             <a class="btn btn-outline-dark btn-square" href=""><i class="far fa-heart"></i></a>
@@ -601,7 +640,10 @@
             <div class="col-lg-3 col-md-4 col-sm-6 pb-1">
                 <div class="product-item bg-light mb-4">
                     <div class="product-img position-relative overflow-hidden">
-                        <img class="img-fluid w-100" src="img/attach.jpeg" alt="">
+                        <video class="img-fluid w-100" playsinline muted loop controls>
+                            <source src="img/photos/video set (9).mp4" type="video/mp4">
+                            Your browser does not support the video tag.
+                        </video>
                         <div class="product-action">
                             <a class="btn btn-outline-dark btn-square" href=""><i class="fa fa-shopping-cart"></i></a>
                             <a class="btn btn-outline-dark btn-square" href=""><i class="far fa-heart"></i></a>
@@ -628,7 +670,10 @@
             <div class="col-lg-3 col-md-4 col-sm-6 pb-1">
                 <div class="product-item bg-light mb-4">
                     <div class="product-img position-relative overflow-hidden">
-                        <img class="img-fluid w-100" src="img/vally.jpeg" alt="">
+                        <video class="img-fluid w-100" playsinline muted loop controls>
+                            <source src="img/photos/video set (10).mp4" type="video/mp4">
+                            Your browser does not support the video tag.
+                        </video>
                         <div class="product-action">
                             <a class="btn btn-outline-dark btn-square" href=""><i class="fa fa-shopping-cart"></i></a>
                             <a class="btn btn-outline-dark btn-square" href=""><i class="far fa-heart"></i></a>
@@ -655,7 +700,10 @@
             <div class="col-lg-3 col-md-4 col-sm-6 pb-1">
                 <div class="product-item bg-light mb-4">
                     <div class="product-img position-relative overflow-hidden">
-                        <img class="img-fluid w-100" src="img/socket.jpg" alt="">
+                        <video class="img-fluid w-100" playsinline muted loop controls>
+                            <source src="img/photos/video set (11).mp4" type="video/mp4">
+                            Your browser does not support the video tag.
+                        </video>
                         <div class="product-action">
                             <a class="btn btn-outline-dark btn-square" href=""><i class="fa fa-shopping-cart"></i></a>
                             <a class="btn btn-outline-dark btn-square" href=""><i class="far fa-heart"></i></a>
@@ -682,7 +730,10 @@
             <div class="col-lg-3 col-md-4 col-sm-6 pb-1">
                 <div class="product-item bg-light mb-4">
                     <div class="product-img position-relative overflow-hidden">
-                        <img class="img-fluid w-100" src="img/holder.jpeg" alt="">
+                        <video class="img-fluid w-100" playsinline muted loop controls>
+                            <source src="img/photos/video set (12).mp4" type="video/mp4">
+                            Your browser does not support the video tag.
+                        </video>
                         <div class="product-action">
                             <a class="btn btn-outline-dark btn-square" href=""><i class="fa fa-shopping-cart"></i></a>
                             <a class="btn btn-outline-dark btn-square" href=""><i class="far fa-heart"></i></a>
@@ -746,7 +797,10 @@
             <div class="col-lg-3 col-md-4 col-sm-6 pb-1">
                 <div class="product-item bg-light mb-4">
                     <div class="product-img position-relative overflow-hidden">
-                        <img class="img-fluid w-100" src="img/toilet one.jpg" alt="">
+                        <video class="img-fluid w-100" playsinline muted loop controls>
+                            <source src="img/photos/video set (13).mp4" type="video/mp4">
+                            Your browser does not support the video tag.
+                        </video>
                         <div class="product-action">
                             <a class="btn btn-outline-dark btn-square" href=""><i class="fa fa-shopping-cart"></i></a>
                             <a class="btn btn-outline-dark btn-square" href=""><i class="far fa-heart"></i></a>
@@ -773,7 +827,10 @@
             <div class="col-lg-3 col-md-4 col-sm-6 pb-1">
                 <div class="product-item bg-light mb-4">
                     <div class="product-img position-relative overflow-hidden">
-                        <img class="img-fluid w-100" src="img/toilet two.jpg" alt="">
+                        <video class="img-fluid w-100" playsinline muted loop controls>
+                            <source src="img/photos/video set (14).mp4" type="video/mp4">
+                            Your browser does not support the video tag.
+                        </video>
                         <div class="product-action">
                             <a class="btn btn-outline-dark btn-square" href=""><i class="fa fa-shopping-cart"></i></a>
                             <a class="btn btn-outline-dark btn-square" href=""><i class="far fa-heart"></i></a>
@@ -800,7 +857,10 @@
             <div class="col-lg-3 col-md-4 col-sm-6 pb-1">
                 <div class="product-item bg-light mb-4">
                     <div class="product-img position-relative overflow-hidden">
-                        <img class="img-fluid w-100" src="img/toilet three.jpg" alt="">
+                        <video class="img-fluid w-100" playsinline muted loop controls>
+                            <source src="img/photos/video set (15).mp4" type="video/mp4">
+                            Your browser does not support the video tag.
+                        </video>
                         <div class="product-action">
                             <a class="btn btn-outline-dark btn-square" href=""><i class="fa fa-shopping-cart"></i></a>
                             <a class="btn btn-outline-dark btn-square" href=""><i class="far fa-heart"></i></a>
@@ -827,7 +887,10 @@
             <div class="col-lg-3 col-md-4 col-sm-6 pb-1">
                 <div class="product-item bg-light mb-4">
                     <div class="product-img position-relative overflow-hidden">
-                        <img class="img-fluid w-100" src="img/toilet four.jpg" alt="">
+                        <video class="img-fluid w-100" playsinline muted loop controls>
+                            <source src="img/photos/video set (16).mp4" type="video/mp4">
+                            Your browser does not support the video tag.
+                        </video>
                         <div class="product-action">
                             <a class="btn btn-outline-dark btn-square" href=""><i class="fa fa-shopping-cart"></i></a>
                             <a class="btn btn-outline-dark btn-square" href=""><i class="far fa-heart"></i></a>
@@ -854,7 +917,10 @@
             <div class="col-lg-3 col-md-4 col-sm-6 pb-1">
                 <div class="product-item bg-light mb-4">
                     <div class="product-img position-relative overflow-hidden">
-                        <img class="img-fluid w-100" src="img/toilet five.jpg" alt="">
+                        <video class="img-fluid w-100" playsinline muted loop controls>
+                            <source src="img/photos/video set (17).mp4" type="video/mp4">
+                            Your browser does not support the video tag.
+                        </video>
                         <div class="product-action">
                             <a class="btn btn-outline-dark btn-square" href=""><i class="fa fa-shopping-cart"></i></a>
                             <a class="btn btn-outline-dark btn-square" href=""><i class="far fa-heart"></i></a>
@@ -881,7 +947,10 @@
             <div class="col-lg-3 col-md-4 col-sm-6 pb-1">
                 <div class="product-item bg-light mb-4">
                     <div class="product-img position-relative overflow-hidden">
-                        <img class="img-fluid w-100" src="img/toilet seven.jpeg" alt="">
+                        <video class="img-fluid w-100" playsinline muted loop controls>
+                            <source src="img/photos/video set (18).mp4" type="video/mp4">
+                            Your browser does not support the video tag.
+                        </video>
                         <div class="product-action">
                             <a class="btn btn-outline-dark btn-square" href=""><i class="fa fa-shopping-cart"></i></a>
                             <a class="btn btn-outline-dark btn-square" href=""><i class="far fa-heart"></i></a>
@@ -908,7 +977,10 @@
             <div class="col-lg-3 col-md-4 col-sm-6 pb-1">
                 <div class="product-item bg-light mb-4">
                     <div class="product-img position-relative overflow-hidden">
-                        <img class="img-fluid w-100" src="img/toilet eihgt.jpg" alt="">
+                        <video class="img-fluid w-100" playsinline muted loop controls>
+                            <source src="img/photos/video set (19).mp4" type="video/mp4">
+                            Your browser does not support the video tag.
+                        </video>
                         <div class="product-action">
                             <a class="btn btn-outline-dark btn-square" href=""><i class="fa fa-shopping-cart"></i></a>
                             <a class="btn btn-outline-dark btn-square" href=""><i class="far fa-heart"></i></a>
@@ -935,7 +1007,10 @@
             <div class="col-lg-3 col-md-4 col-sm-6 pb-1">
                 <div class="product-item bg-light mb-4">
                     <div class="product-img position-relative overflow-hidden">
-                        <img class="img-fluid w-100" src="img/toilet ten.jpeg" alt="">
+                        <video class="img-fluid w-100" playsinline muted loop controls>
+                            <source src="img/photos/video set (20).mp4" type="video/mp4">
+                            Your browser does not support the video tag.
+                        </video>
                         <div class="product-action">
                             <a class="btn btn-outline-dark btn-square" href=""><i class="fa fa-shopping-cart"></i></a>
                             <a class="btn btn-outline-dark btn-square" href=""><i class="far fa-heart"></i></a>
@@ -1187,6 +1262,15 @@
         </div>
     </div>
     <!-- Products End -->
+
+    <!-- User Submitted Videos Start -->
+    <div class="container-fluid pt-4 pb-3">
+        <h2 class="section-title position-relative text-uppercase mx-xl-5 mb-4"><span class="bg-secondary pr-3">User Submitted Videos</span></h2>
+        <div class="row px-xl-5" id="userVideosContainer">
+            <!-- User videos inserted here by JS -->
+        </div>
+    </div>
+    <!-- User Submitted Videos End -->
 
     <!-- Products Start -->
     <div class="container-fluid pt-5 pb-3">
@@ -2623,7 +2707,7 @@
                     &copy; <a class="text-primary" href="#">kbplumbing&glassmart.co.ug</a>. All Rights Reserved. 
                     <!--/*** The author’s attribution link must remain intact in the template. ***/-->
                     <!--/*** If you wish to remove this credit link, please purchase the Pro Version . ***/-->
-                    Designed by <a class="text-primary" href="https://htmlcodex.com">Hussmax</a>
+                    Designed by <a class="text-primary" href="https://hussmax.github.io/elitewebsolutions/">Hussmax</a>
                 </p>
             </div>
             <div class="col-md-6 px-xl-0 text-center text-md-right">
@@ -2636,6 +2720,42 @@
 
     <!-- Back to Top -->
     <a href="#" class="btn btn-primary back-to-top"><i class="fa fa-angle-double-up"></i></a>
+
+        <!-- Submit Video Modal -->
+        <div class="modal fade" id="submitVideoModal" tabindex="-1" role="dialog" aria-labelledby="submitVideoModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-lg" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="submitVideoModalLabel">Submit Your Video</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <form id="submitVideoForm">
+                            <div class="form-group">
+                                <label for="videoTitle">Title</label>
+                                <input type="text" class="form-control" id="videoTitle" placeholder="A short title (e.g., Plumbing Maintenance)">
+                            </div>
+                            <div class="form-group">
+                                <label for="videoFile">Video file</label>
+                                <input type="file" class="form-control-file" id="videoFile" accept="video/*">
+                                <small class="form-text text-muted">Videos are stored locally in your browser (no upload to server). Large videos may not persist depending on browser storage limits.</small>
+                            </div>
+                            <div class="form-group">
+                                <label for="videoDescription">Description (optional)</label>
+                                <textarea id="videoDescription" class="form-control" rows="3" placeholder="Short description"></textarea>
+                            </div>
+                            <div class="text-right">
+                                <button type="submit" class="btn btn-primary">Submit Video</button>
+                            </div>
+                        </form>
+                        <hr>
+                        <div id="submitVideoStatus" class="small text-muted"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
 
 
     <!-- JavaScript Libraries -->

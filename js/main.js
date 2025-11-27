@@ -542,11 +542,216 @@
         $('#orderPreviewModal').modal('hide');
     });
 
+    // Mark product-items that contain video as video-product, rename titles, and enable click-to-play
+    // This makes videos playable directly without showing add-to-cart / like / favorite overlays
+    function enhanceVideoProducts() {
+        $('.product-item').has('video').each(function () {
+            var $item = $(this);
+            $item.addClass('video-product');
+            // Rename the visible product title to a plumbing/service label as requested
+            var $title = $item.find('.h6').first();
+            if ($title.length) {
+                $title.text('Plumbing & Maintenance');
+            }
+        });
+
+        // Click-to-play: toggle play/pause; pause other videos when one plays
+        $(document).on('click', '.product-img video', function (e) {
+            e.stopPropagation();
+            var vid = this;
+            try {
+                if (vid.paused) {
+                    // pause others
+                    $('video').each(function () { if (this !== vid) { try { this.pause(); } catch (err) {} } });
+                    vid.play();
+                } else {
+                    vid.pause();
+                }
+            } catch (err) {
+                console.warn('Video play/pause failed', err);
+            }
+        });
+    }
+
     $(document).ready(function () {
         initCart();
         initLiked();
         displayCartItems();
+        enhanceVideoProducts();
     });
+
+    // ====== USER VIDEO UPLOAD (IndexedDB) ======
+    // Simple IndexedDB wrapper
+    function openVideoDB() {
+        return new Promise(function (resolve, reject) {
+            var req = window.indexedDB.open('kb_user_videos', 1);
+            req.onupgradeneeded = function (e) {
+                var db = e.target.result;
+                if (!db.objectStoreNames.contains('videos')) {
+                    db.createObjectStore('videos', { keyPath: 'id', autoIncrement: true });
+                }
+            };
+            req.onsuccess = function (e) { resolve(e.target.result); };
+            req.onerror = function (e) { reject(e.target.error); };
+        });
+    }
+
+    function addVideoToDB(meta, blob) {
+        return openVideoDB().then(function (db) {
+            return new Promise(function (resolve, reject) {
+                var tx = db.transaction('videos', 'readwrite');
+                var store = tx.objectStore('videos');
+                var item = { title: meta.title || 'User Video', description: meta.description || '', file: blob, created: Date.now() };
+                var req = store.add(item);
+                req.onsuccess = function (e) { resolve(e.target.result); };
+                req.onerror = function (e) { reject(e.target.error); };
+            });
+        });
+    }
+
+    function listVideosFromDB() {
+        return openVideoDB().then(function (db) {
+            return new Promise(function (resolve, reject) {
+                var tx = db.transaction('videos', 'readonly');
+                var store = tx.objectStore('videos');
+                var req = store.getAll();
+                req.onsuccess = function (e) { resolve(e.target.result || []); };
+                req.onerror = function (e) { reject(e.target.error); };
+            });
+        });
+    }
+
+    // Try uploading to server. Server should accept multipart/form-data at POST /upload
+    function uploadToServer(formData) {
+        // Return a promise that resolves with server JSON on success, or rejects on failure
+        return fetch('/upload', {
+            method: 'POST',
+            body: formData
+        }).then(function (res) {
+            if (!res.ok) throw new Error('Upload failed with status ' + res.status);
+            return res.json();
+        });
+    }
+
+    // Fetch list of server videos from GET /videos -> returns JSON array [{url, title, created}, ...]
+    function fetchServerVideos() {
+        return fetch('/videos', { method: 'GET' }).then(function (res) {
+            if (!res.ok) throw new Error('Failed to fetch server videos');
+            return res.json();
+        }).catch(function (err) {
+            // propagate error so caller can fallback to local DB
+            return Promise.reject(err);
+        });
+    }
+
+    function renderUserVideos() {
+        var $container = $('#userVideosContainer');
+        if (!$container.length) return;
+                $container.empty();
+
+                // helper to render a single card (server or local)
+                function appendCard(opts) {
+                        var card = '<div class="col-lg-3 col-md-4 col-sm-6 pb-1">' +
+                                '<div class="product-item bg-light mb-4">' +
+                                    '<div class="product-img position-relative overflow-hidden">' +
+                                        '<video class="img-fluid w-100" playsinline controls muted preload="metadata">' +
+                                            '<source src="' + opts.src + '" type="video/mp4">' +
+                                            'Your browser does not support the video tag.' +
+                                        '</video>' +
+                                    '</div>' +
+                                    '<div class="text-center py-3">' +
+                                        '<div class="h6 text-truncate">' + escapeHtml(opts.title || 'User Video') + '</div>' +
+                                        '<div class="small text-muted">' + (opts.created ? (new Date(opts.created)).toLocaleString() : '') + '</div>' +
+                                    '</div>' +
+                                '</div>' +
+                            '</div>';
+                        $container.append(card);
+                }
+
+                // 1) fetch server videos and render
+                fetchServerVideos().then(function (serverVideos) {
+                        if (serverVideos && serverVideos.length) {
+                                serverVideos.forEach(function (v) {
+                                        appendCard({ src: v.url, title: v.title, created: v.created });
+                                });
+                        }
+
+                        // 2) render local IndexedDB videos after server videos
+                        listVideosFromDB().then(function (videos) {
+                                if (!videos.length && !(serverVideos && serverVideos.length)) {
+                                        $container.html('<div class="col-12 text-center text-muted">No user videos yet. Be the first to submit!</div>');
+                                        return;
+                                }
+                                videos.reverse().forEach(function (v) {
+                                        var url = URL.createObjectURL(v.file);
+                                        appendCard({ src: url, title: v.title, created: v.created });
+                                });
+                        }).catch(function (err) {
+                                console.error('List local videos error', err);
+                        });
+                }).catch(function (err) {
+                        // If server call fails, fall back to local listing only
+                        listVideosFromDB().then(function (videos) {
+                                if (!videos.length) {
+                                        $container.html('<div class="col-12 text-center text-muted">No user videos yet. Be the first to submit!</div>');
+                                        return;
+                                }
+                                videos.reverse().forEach(function (v) {
+                                        var url = URL.createObjectURL(v.file);
+                                        appendCard({ src: url, title: v.title, created: v.created });
+                                });
+                        }).catch(function (err2) { console.error('List videos error', err2); });
+                });
+    }
+
+    function escapeHtml(s) { return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
+
+    // Open modal on button click
+    $(document).on('click', '#openSubmitVideoBtn', function () { $('#submitVideoModal').modal('show'); });
+
+    // Handle form submission: try server upload, fallback to IndexedDB
+        $(document).on('submit', '#submitVideoForm', function (e) {
+            e.preventDefault();
+            var title = $('#videoTitle').val().trim();
+            var desc = $('#videoDescription').val().trim();
+            var fileInput = $('#videoFile')[0];
+            var status = $('#submitVideoStatus');
+            status.text('');
+            if (!fileInput.files || !fileInput.files[0]) { status.text('Please choose a video file.'); return; }
+            var file = fileInput.files[0];
+            if (!file.type.startsWith('video/')) { status.text('Selected file is not a video.'); return; }
+            if (file.size > 50 * 1024 * 1024) { status.text('File too large. Max 50MB allowed.'); return; }
+
+            status.text('Uploading...');
+
+            var formData = new FormData();
+            formData.append('title', title);
+            formData.append('description', desc);
+            formData.append('video', file, file.name);
+
+            uploadToServer(formData).then(function (res) {
+                status.text('Uploaded to server. Thank you!');
+                $('#submitVideoForm')[0].reset();
+                $('#submitVideoModal').modal('hide');
+                renderUserVideos();
+            }).catch(function (err) {
+                console.warn('Server upload failed, saving locally', err);
+                status.text('Server unavailable — saving locally.');
+                // Save to IndexedDB as fallback
+                addVideoToDB({ title: title, description: desc }, file).then(function (id) {
+                    status.text('Saved locally (id=' + id + ').');
+                    $('#submitVideoForm')[0].reset();
+                    $('#submitVideoModal').modal('hide');
+                    renderUserVideos();
+                }).catch(function (err2) {
+                    console.error('Save video failed', err2);
+                    status.text('Failed to save video. Browser storage may be full or not supported.');
+                });
+            });
+        });
+
+    // Render user videos on load
+    $(document).ready(function () { renderUserVideos(); });
     
 })(jQuery);
 
